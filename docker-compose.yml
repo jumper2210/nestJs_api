@@ -1,14 +1,15 @@
 version: '3.8'
 services:
-  dev-db:
-    image: postgres:13
+  postgres:
+    container_name: postgres
+    image: postgres:latest
     ports:
-      - 5434:5432
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: nest
+      - '5432:5432'
+    volumes:
+      - /data/postgres:/data/postgres
+    env_file:
+      - docker.env
     networks:
-      - jumper
+      - postgres
 networks:
-  jumper:
+  postgres:
